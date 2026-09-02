@@ -1,0 +1,242 @@
+/* ============================================================
+   Design tokens — Professional / Corporate, navy + brass
+   Structured, data-driven aesthetic for a task & reporting tool.
+   ============================================================ */
+
+:root {
+  /* ---- Typography ---- */
+  --font-sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+
+  /* ---- Radius & shadow (structured, minimal rounding) ---- */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --shadow-sm: 0 1px 2px rgba(15, 40, 70, 0.06);
+  --shadow-md: 0 4px 14px rgba(15, 40, 70, 0.08);
+  --shadow-lg: 0 12px 32px rgba(15, 40, 70, 0.14);
+  --shadow-focus: 0 0 0 3px var(--color-primary-ring);
+
+  /* ---- Surfaces ---- */
+  --bg-body: #f4f6fa;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f7f9fc;
+  --bg-surface-alt: #eef1f7;
+  --sidebar-bg: #0f2846;
+
+  /* ---- Borders ---- */
+  --border-color: #dde3ee;
+  --border-color-strong: #c3cddc;
+  --border-color-light: #e9edf4;
+
+  /* ---- Text ---- */
+  --text-primary: #101d2e;
+  --text-secondary: #3c4a5e;
+  --text-muted: #647389;
+  --text-faint: #94a1b4;
+  --text-on-color: #ffffff;
+
+  /* ---- Brand / primary (structured navy-blue) ---- */
+  --color-primary: #1d4e89;
+  --color-primary-hover: #163e6d;
+  --color-primary-light: #2e6cb0;
+  --color-primary-bg: #e8f0f9;
+  --color-primary-ring: rgba(29, 78, 137, 0.18);
+
+  /* ---- Accent (muted brass — used sparingly for highlights) ---- */
+  --color-accent: #b08d57;
+  --color-accent-hover: #96773f;
+  --color-accent-bg: #faf3e7;
+
+  /* ---- Deep navy (hero panels, sidebar gradients) ---- */
+  --color-navy-950: #08192e;
+  --color-navy-900: #0f2846;
+  --color-navy-800: #163a63;
+  --color-navy-700: #1d4e89;
+
+  /* ---- Status ---- */
+  --color-danger: #c0392b;
+  --color-danger-hover: #a5301f;
+  --color-danger-dark: #8a2a1f;
+  --color-danger-bg: #fbe9e7;
+
+  --color-success: #1f7a4d;
+  --color-success-bg: #e5f5ec;
+  --color-success-bg-alt: #e5f5ec;
+  --color-success-text-alt: #1f7a4d;
+
+  --color-warning: #a3720a;
+  --color-warning-bg: #fbf1de;
+  --color-warning-text: #8a5f08;
+
+  /* ---- Misc ---- */
+  --scrollbar-thumb: #c3cddc;
+  --scrollbar-thumb-hover: #94a1b4;
+
+  /* ---- Stat-card icon tints ---- */
+  --icon-blue-bg: #e8f0f9;
+  --icon-blue-color: #1d4e89;
+  --icon-green-bg: #e5f5ec;
+  --icon-green-color: #1f7a4d;
+  --icon-orange-bg: #faf3e7;
+  --icon-orange-color: #b08d57;
+  --icon-purple-bg: #ece7f5;
+  --icon-purple-color: #6a4fa0;
+
+  /* ---- Signature: blueprint grid backdrop ---- */
+  --grid-line: rgba(29, 78, 137, 0.07);
+  --grid-line-dark: rgba(255, 255, 255, 0.05);
+
+  /* ---- Sidebar text (sidebar bg is fixed dark navy in both themes,
+     so its text tokens don't flip with light/dark mode) ---- */
+  --sidebar-text: rgba(255, 255, 255, 0.7);
+  --sidebar-text-strong: #ffffff;
+  --sidebar-text-muted: rgba(255, 255, 255, 0.48);
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.06);
+  --sidebar-active-bg: rgba(255, 255, 255, 0.1);
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg-body: #0a1729;
+  --bg-surface: #101f36;
+  --bg-surface-hover: #16283f;
+  --bg-surface-alt: #142338;
+  --sidebar-bg: #08192e;
+
+  --border-color: #223652;
+  --border-color-strong: #2e4666;
+  --border-color-light: #1a2c46;
+
+  --text-primary: #eef2f8;
+  --text-secondary: #c2cede;
+  --text-muted: #94a5c0;
+  --text-faint: #6c7c98;
+  --text-on-color: #ffffff;
+
+  --color-primary: #4d86c7;
+  --color-primary-hover: #6a9cd6;
+  --color-primary-light: #6a9cd6;
+  --color-primary-bg: rgba(77, 134, 199, 0.14);
+  --color-primary-ring: rgba(77, 134, 199, 0.28);
+
+  --color-accent: #c9a56e;
+  --color-accent-hover: #d8b783;
+  --color-accent-bg: rgba(201, 165, 110, 0.12);
+
+  --color-danger: #e0685a;
+  --color-danger-hover: #e88377;
+  --color-danger-dark: #f0a99f;
+  --color-danger-bg: rgba(224, 104, 90, 0.14);
+
+  --color-success: #4caf7d;
+  --color-success-bg: rgba(76, 175, 125, 0.14);
+  --color-success-bg-alt: rgba(76, 175, 125, 0.14);
+  --color-success-text-alt: #4caf7d;
+
+  --color-warning: #d0a13f;
+  --color-warning-bg: rgba(208, 161, 63, 0.14);
+  --color-warning-text: #d0a13f;
+
+  --scrollbar-thumb: #2e4666;
+  --scrollbar-thumb-hover: #3d5c82;
+
+  --icon-blue-bg: rgba(77, 134, 199, 0.16);
+  --icon-blue-color: #6a9cd6;
+  --icon-green-bg: rgba(76, 175, 125, 0.16);
+  --icon-green-color: #4caf7d;
+  --icon-orange-bg: rgba(201, 165, 110, 0.16);
+  --icon-orange-color: #c9a56e;
+  --icon-purple-bg: rgba(150, 130, 200, 0.16);
+  --icon-purple-color: #a493d1;
+
+  --grid-line: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  background: var(--bg-body);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+[data-theme="dark"],
+[data-theme="light"] {
+  color: var(--text-primary);
+}
+
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ============================================================
+   Shared structural utilities used across the app
+   ============================================================ */
+
+/* Subtle blueprint/graph-paper grid — the signature backdrop motif */
+.blueprint-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Bracket-cornered card — evokes an instrument panel / technical readout */
+.bracket-card {
+  position: relative;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+
+.bracket-card::before,
+.bracket-card::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--color-accent);
+  border-style: solid;
+  opacity: 0.8;
+}
+
+.bracket-card::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+  border-top-left-radius: 3px;
+}
+
+.bracket-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+  border-bottom-right-radius: 3px;
+}
+
+/* Monospace numeric readout — used for stat figures */
+.stat-figure {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Accessible focus ring, consistent across the app */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

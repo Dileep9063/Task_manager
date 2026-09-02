@@ -1,0 +1,248 @@
+/* ================= Overlay ================= */
+
+.edittask-modal-overlay {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 2000;
+
+}
+
+
+/* ================= Modal ================= */
+
+.edit-modal {
+
+    width: 450px;
+
+    background: var(--bg-surface);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 12px;
+
+    padding: 30px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+/* ================= Heading ================= */
+
+.edit-modal h2 {
+
+    text-align: center;
+
+    margin: 0 0 10px;
+
+    font-size: 28px;
+
+    color: var(--text-primary);
+
+}
+
+
+/* ================= Inputs ================= */
+
+.edit-modal input,
+
+.edit-modal textarea,
+
+.edit-modal select {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    font-size: 15px;
+
+    border: 1px solid var(--border-color-strong);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    transition: 0.3s;
+
+    font-family: inherit;
+
+    background: var(--bg-surface);
+
+    color: var(--text-primary);
+
+}
+
+
+/* ================= Textarea ================= */
+
+.edit-modal textarea {
+
+    min-height: 110px;
+
+    resize: vertical;
+
+}
+
+
+/* ================= Focus ================= */
+
+.edit-modal input:focus,
+
+.edit-modal textarea:focus,
+
+.edit-modal select:focus {
+
+    border-color: var(--color-primary);
+
+    box-shadow: 0 0 5px var(--color-primary-ring);
+
+}
+
+
+/* ================= Dropdown ================= */
+
+.edit-modal select {
+
+    cursor: pointer;
+
+    background: var(--bg-surface);
+
+}
+
+
+/* ================= Date Input ================= */
+
+.edit-modal input[type="date"] {
+
+    cursor: pointer;
+
+}
+
+
+/* ================= Buttons ================= */
+
+.edittask-modal-buttons {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 15px;
+
+    margin-top: 10px;
+
+}
+
+
+/* ================= Update Button ================= */
+
+.update-btn {
+
+    background: var(--color-primary);
+
+    color: var(--text-on-color);
+
+    border: none;
+
+    padding: 12px 25px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+.update-btn:hover {
+
+    background: var(--color-primary-hover);
+
+}
+
+
+/* ================= Cancel Button ================= */
+
+.edittask-cancel-btn {
+
+    background: var(--bg-surface-alt);
+
+    color: var(--text-secondary);
+
+    border: none;
+
+    padding: 12px 25px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+.edittask-cancel-btn:hover {
+
+    background: var(--bg-surface-hover);
+
+}
+
+
+/* ================= Mobile ================= */
+
+@media (max-width: 500px) {
+
+    .edit-modal {
+
+        width: 90%;
+
+        padding: 20px;
+
+    }
+
+    .edittask-modal-buttons {
+
+        flex-direction: column;
+
+    }
+
+    .update-btn,
+
+    .edittask-cancel-btn {
+
+        width: 100%;
+
+    }
+
+}

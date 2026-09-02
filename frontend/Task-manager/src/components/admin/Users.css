@@ -1,0 +1,643 @@
+/* =================================
+   USERS PAGE
+================================= */
+
+.users-page {
+    width: 100%;
+    max-width: 100%;
+
+    background: var(--bg-surface);
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    box-sizing: border-box;
+
+    /*
+       Prevent the entire page from
+       becoming horizontally scrollable.
+    */
+    overflow-x: hidden;
+}
+
+.users-page h1 {
+    margin: 0 0 25px;
+}
+
+
+/* =================================
+   TABLE CONTAINER
+================================= */
+
+/*
+   ONLY THIS CONTAINER WILL SCROLL
+   HORIZONTALLY ON MOBILE.
+*/
+
+.users-table {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    margin-top: 20px;
+
+    box-sizing: border-box;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+}
+
+
+/* =================================
+   SEARCH BOX
+================================= */
+
+.search-box {
+    width: 300px;
+    max-width: 100%;
+
+    padding: 10px 15px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid var(--border-color-strong);
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    box-sizing: border-box;
+}
+
+.search-box:focus {
+    border-color: var(--color-primary);
+}
+
+
+/* =================================
+   TABLE
+================================= */
+
+/*
+   IMPORTANT:
+
+   Table remains 1100px wide.
+
+   It will NOT shrink to the
+   mobile screen width.
+*/
+
+.users-table table {
+    width: 1100px !important;
+
+    min-width: 1100px !important;
+
+    max-width: none !important;
+
+    border-collapse: collapse;
+
+    table-layout: fixed !important;
+
+    background: var(--bg-surface);
+
+    display: table !important;
+}
+
+
+/* =================================
+   FORCE NORMAL TABLE STRUCTURE
+================================= */
+
+.users-table thead {
+    display: table-header-group !important;
+}
+
+.users-table tbody {
+    display: table-row-group !important;
+}
+
+.users-table tr {
+    display: table-row !important;
+}
+
+.users-table th,
+.users-table td {
+    display: table-cell !important;
+}
+
+
+/* =================================
+   TABLE HEADER
+================================= */
+
+.users-table th {
+    background: var(--color-primary);
+
+    color: var(--text-on-color);
+
+    padding: 14px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+    box-sizing: border-box;
+}
+
+
+/* =================================
+   TABLE CELLS
+================================= */
+
+.users-table td {
+    padding: 14px;
+
+    border-bottom: 1px solid var(--border-color);
+
+    vertical-align: middle;
+
+    box-sizing: border-box;
+
+    word-break: break-word;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =================================
+   ROW HOVER
+================================= */
+
+.users-table tbody tr:hover {
+    background: var(--bg-surface-hover);
+}
+
+
+/* =================================
+   FIXED COLUMN WIDTHS
+================================= */
+
+/*
+   Total width:
+
+   ID           60px
+   Name         170px
+   Email        240px
+   Role         100px
+   Created      150px
+   Status       130px
+   Actions      250px
+
+   TOTAL = 1100px
+*/
+
+
+/* ID */
+
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+    width: 60px !important;
+
+    min-width: 60px !important;
+}
+
+
+/* NAME */
+
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+    width: 170px !important;
+
+    min-width: 170px !important;
+
+    word-break: break-word;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* EMAIL */
+
+.users-table th:nth-child(3),
+.users-table td:nth-child(3) {
+    width: 240px !important;
+
+    min-width: 240px !important;
+
+    word-break: break-word;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ROLE */
+
+.users-table th:nth-child(4),
+.users-table td:nth-child(4) {
+    width: 100px !important;
+
+    min-width: 100px !important;
+
+    white-space: nowrap;
+}
+
+
+/* CREATED DATE */
+
+.users-table th:nth-child(5),
+.users-table td:nth-child(5) {
+    width: 150px !important;
+
+    min-width: 150px !important;
+
+    white-space: nowrap;
+}
+
+
+/* STATUS */
+
+.users-table th:nth-child(6),
+.users-table td:nth-child(6) {
+    width: 130px !important;
+
+    min-width: 130px !important;
+
+    white-space: nowrap;
+}
+
+
+/* ACTIONS */
+
+.users-table th:nth-child(7),
+.users-table td:nth-child(7) {
+    width: 250px !important;
+
+    min-width: 250px !important;
+}
+
+
+/* =================================
+   STATUS BADGE
+================================= */
+
+.active-status {
+    display: inline-block;
+
+    min-width: 80px;
+
+    text-align: center;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: var(--color-success-bg);
+
+    color: var(--color-success);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    box-sizing: border-box;
+}
+
+
+.blocked-status {
+    display: inline-block;
+
+    min-width: 80px;
+
+    text-align: center;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: var(--color-danger-bg);
+
+    color: var(--color-danger-hover);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    box-sizing: border-box;
+}
+
+
+/* =================================
+   ACTION CONTAINER
+================================= */
+
+.user-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    white-space: nowrap;
+}
+
+
+/* =================================
+   STATUS BUTTON
+================================= */
+
+.status-btn {
+    width: 95px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    background: var(--color-primary);
+
+    color: var(--text-on-color);
+
+    transition: 0.25s;
+}
+
+.status-btn:hover {
+    background: var(--color-primary-hover);
+}
+
+
+/* =================================
+   DELETE BUTTON
+================================= */
+
+.delete-user-btn {
+    width: 90px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    background: var(--color-danger);
+
+    color: var(--text-on-color);
+
+    transition: 0.25s;
+}
+
+.delete-user-btn:hover {
+    background: var(--color-danger-hover);
+}
+
+
+/* =================================
+   NO USERS
+================================= */
+
+.no-users {
+    text-align: center;
+
+    padding: 30px !important;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+}
+
+
+/* =================================
+   TABLET
+================================= */
+
+@media (max-width: 768px) {
+
+    .users-page {
+        width: 100%;
+
+        padding: 15px;
+
+        box-sizing: border-box;
+
+        overflow-x: hidden;
+    }
+
+
+    .users-page h1 {
+        font-size: 24px;
+
+        margin-bottom: 20px;
+    }
+
+
+    /* Search */
+
+    .search-box {
+        width: 100%;
+
+        max-width: 100%;
+    }
+
+
+    /*
+       Keep table wide.
+       Do NOT set width: 100%.
+    */
+
+    .users-table {
+        width: 100%;
+
+        max-width: 100%;
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    .users-table table {
+        width: 1100px !important;
+
+        min-width: 1100px !important;
+
+        max-width: none !important;
+    }
+}
+
+
+/* =================================
+   SMALL MOBILE
+================================= */
+
+@media (max-width: 480px) {
+
+    .users-page {
+        padding: 12px;
+
+        overflow-x: hidden;
+    }
+
+
+    .users-page h1 {
+        font-size: 21px;
+
+        margin-bottom: 18px;
+    }
+
+
+    .search-box {
+        width: 100%;
+
+        font-size: 13px;
+
+        padding: 9px 12px;
+    }
+
+
+    /*
+       TABLE STILL 1100PX.
+
+       On a 430px phone:
+       430px viewport
+          ↓
+       1100px table
+          ↓
+       horizontal swipe
+    */
+
+    .users-table {
+        width: 100%;
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+    }
+
+
+    .users-table table {
+        width: 1100px !important;
+
+        min-width: 1100px !important;
+
+        max-width: none !important;
+    }
+}
+
+
+/* =================================
+   VERY SMALL MOBILE
+================================= */
+
+@media (max-width: 360px) {
+
+    .users-page {
+        padding: 10px;
+    }
+
+
+    .users-page h1 {
+        font-size: 20px;
+    }
+
+
+    .search-box {
+        font-size: 12px;
+
+        padding: 8px 10px;
+    }
+}
+/* =================================
+   SEARCH AREA
+================================= */
+
+.users-search {
+    width: 100%;
+    max-width: 100%;
+
+    margin-top: 20px;
+    margin-bottom: 0;
+
+    box-sizing: border-box;
+
+    position: relative;
+    z-index: 10;
+}
+
+
+/* =================================
+   SEARCH BOX
+================================= */
+
+.search-box {
+    width: 300px;
+    max-width: 100%;
+
+    padding: 10px 15px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid var(--border-color-strong);
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    background: var(--bg-surface);
+}
+
+.search-box:focus {
+    border-color: var(--color-primary);
+}
+
+
+/* =================================
+   MOBILE SEARCH
+================================= */
+
+@media (max-width: 768px) {
+
+    .users-search {
+        width: 100%;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 100%;
+    }
+}

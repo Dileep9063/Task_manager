@@ -1,0 +1,150 @@
+.reports {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.reports-header h1 {
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  margin: 0 0 0.25rem 0;
+}
+
+.reports-header p {
+  color: var(--text-muted);
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  margin: 0 0 1.25rem 0;
+}
+
+/* ---------- Summary cards ---------- */
+.reports-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.report-card {
+  background: var(--bg-surface);
+  border-radius: 10px;
+  padding: 1.1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  min-width: 0;
+  text-align: center;
+}
+
+.report-card h3 {
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  color: var(--text-muted);
+  margin: 0 0 0.4rem 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.report-card h2 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  margin: 0;
+  color: var(--text-primary);
+}
+
+/* ---------- Charts ----------
+   Single column by default (each chart gets full container width,
+   which is what actually fixes the "shrunk" look on desktop).
+------------------------------- */
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.chart-box {
+  background: var(--bg-surface);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+}
+
+.chart-box h2 {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  margin: 0 0 0.75rem 0;
+  text-align: center;
+}
+
+/* ---------- From large tablet up, put charts side-by-side,
+   but only once the container is wide enough that each chart
+   still has real room (>=1100px means ~530px per chart min) ---------- */
+@media (min-width: 1100px) {
+  .charts-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- Large desktop: widen everything ---------- */
+@media (min-width: 1440px) {
+  .reports {
+    max-width: 1500px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .reports {
+    max-width: 1700px;
+  }
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1024px) {
+  .reports-cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+/* ---------- Small tablet ---------- */
+@media (max-width: 768px) {
+  .reports-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 640px) {
+  .reports {
+    padding: 0.75rem;
+  }
+
+  .reports-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .report-card {
+    padding: 0.85rem 0.6rem;
+  }
+
+  .charts-container {
+    gap: 1rem;
+  }
+
+  .chart-box {
+    padding: 0.75rem 0.5rem 0.5rem;
+  }
+}
+
+/* ---------- Very small phones ---------- */
+@media (max-width: 380px) {
+  .reports-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .report-card h2 {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,351 @@
+/* ===========================
+   DASHBOARD PAGE STYLES
+   (Layout-level styles like .admin-main, .admin-sidebar,
+   .admin-navbar live in AdminLayout.css / Navbar.css / Sidebar.css —
+   do NOT duplicate them here.)
+=========================== */
+
+/* Welcome banner */
+.welcome-card{
+    background:linear-gradient(135deg,var(--color-primary),var(--color-primary-light));
+    color:var(--text-on-color);
+    padding:30px;
+    border-radius:18px;
+    margin-bottom:30px;
+    box-shadow:0 10px 25px rgba(37,99,235,0.20);
+    animation:fadeIn .4s ease;
+}
+
+.welcome-card h1{
+    font-size:30px;
+    margin:0;
+    font-weight:700;
+}
+
+.welcome-card p{
+    margin-top:12px;
+    font-size:16px;
+    opacity:0.95;
+    line-height:1.6;
+}
+
+@keyframes fadeIn{
+    from{ opacity:0; transform:translateY(15px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* Statistics grid (StatCard components) */
+.stats-container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    margin-top:30px;
+}
+
+.stat-card{
+    background:var(--bg-surface);
+    border:1px solid var(--border-color);
+    border-top:3px solid var(--color-primary);
+    border-radius:var(--radius-lg);
+    padding:24px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:15px;
+    box-shadow:var(--shadow-sm);
+    transition:all .2s ease;
+    cursor:pointer;
+    min-width:0;
+}
+
+.stat-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-md);
+}
+
+.stat-icon{
+    width:60px;
+    height:60px;
+    border-radius:var(--radius-md);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    flex-shrink:0;
+}
+
+.blue .stat-icon{ background:var(--icon-blue-bg); color:var(--icon-blue-color); }
+.green .stat-icon{ background:var(--icon-green-bg); color:var(--icon-green-color); }
+.orange .stat-icon{ background:var(--icon-orange-bg); color:var(--icon-orange-color); }
+.purple .stat-icon{ background:var(--icon-purple-bg); color:var(--icon-purple-color); }
+
+.stat-card h3{
+    margin:0;
+    color:var(--text-muted);
+    font-size:15px;
+    font-weight:500;
+}
+
+.stat-card h2{
+    margin-top:8px;
+    margin-bottom:0;
+    color:var(--text-primary);
+    font-size:32px;
+    font-weight:600;
+    font-family:var(--font-mono);
+    letter-spacing:-0.02em;
+    font-variant-numeric:tabular-nums;
+}
+
+/* Monthly user growth */
+.growth-card{
+    margin-top:30px;
+    background:var(--bg-surface);
+    padding:28px;
+    border-radius:18px;
+    border:1px solid var(--border-color);
+}
+
+.growth-card h2{
+    margin-bottom:25px;
+    color:var(--text-primary);
+}
+
+.growth-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.growth-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.growth-row span{
+    width:100px;
+    color:var(--text-muted);
+}
+
+.growth-progress{
+    flex:1;
+    min-width:80px;
+    height:10px;
+    background:var(--border-color);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.growth-fill{
+    height:100%;
+    background:var(--color-primary);
+    border-radius:20px;
+    transition:width .3s ease;
+}
+
+.growth-row strong{
+    width:40px;
+    color:var(--text-primary);
+}
+
+/* Bottom section: activity + quick actions */
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+    margin-top:35px;
+}
+
+.activity-card,
+.quick-card{
+    background:var(--bg-surface);
+    border:1px solid var(--border-color);
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.activity-card h2,
+.quick-card h2{
+    margin:0 0 20px;
+    font-size:22px;
+    color:var(--text-primary);
+    font-weight:600;
+}
+
+/* Recent activity row (clickable, reveals delete button) */
+.activity-row{
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 18px;
+    margin-bottom:12px;
+    border:1px solid var(--border-color);
+    border-radius:12px;
+    transition:.3s ease;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.activity-row:hover{
+    background:var(--bg-surface-hover);
+}
+
+.activity-main{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.activity-message{
+    margin:0;
+    font-size:16px;
+    font-weight:600;
+    color:var(--text-primary);
+}
+
+.activity-time{
+    font-size:13px;
+    color:var(--text-faint);
+}
+
+.activity-delete-btn{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    background:var(--color-danger);
+    color:var(--text-on-color);
+    border:none;
+    padding:4px 10px;
+    border-radius:4px;
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.activity-delete-btn:hover{
+    background:var(--color-danger-hover);
+}
+
+/* Quick actions */
+.quick-card button{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+    padding:15px 18px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:12px;
+    background:var(--color-primary);
+    color:var(--text-on-color);
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.quick-card button:last-child{
+    margin-bottom:0;
+}
+
+.quick-card button:hover{
+    background:var(--color-primary-hover);
+    transform:translateY(-2px);
+}
+
+/* Large desktop, >1400px */
+@media (min-width:1401px){
+    .stats-container{
+        gap:30px;
+    }
+}
+
+/* Tablet, <=1100px */
+@media (max-width:1100px){
+    .stats-container{
+        gap:16px;
+    }
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* Mobile, <=768px */
+@media (max-width:768px){
+
+    .welcome-card{
+        padding:20px;
+    }
+
+    .welcome-card h1{
+        font-size:24px;
+    }
+
+    .welcome-card p{
+        font-size:14px;
+    }
+
+    .stats-container{
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:12px 8px;
+        flex-direction:column;
+        text-align:center;
+        gap:8px;
+    }
+
+    .activity-card,
+    .quick-card{
+        padding:18px;
+    }
+}
+
+/* Small mobile / iPhone widths, <=480px */
+@media (max-width:480px){
+
+    .stats-container{
+        gap:8px;
+    }
+
+    .stat-card{
+        padding:10px 6px;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:6px;
+    }
+
+    .stat-icon{
+        width:36px;
+        height:36px;
+        font-size:16px;
+    }
+
+    .stat-card h3{
+        font-size:10px;
+        line-height:1.2;
+    }
+
+    .stat-card h2{
+        margin-top:2px;
+        font-size:16px;
+    }
+
+    .welcome-card h1{
+        font-size:20px;
+    }
+
+    .activity-row{
+        padding:12px;
+    }
+
+    .growth-row span{
+        width:70px;
+        font-size:13px;
+    }
+}

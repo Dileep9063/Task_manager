@@ -1,0 +1,207 @@
+/* Navbar container — sits to the right of the full-height sidebar on desktop */
+.admin-navbar {
+  position: fixed;
+  top: 0;
+  left: 260px;
+  right: 0;
+  height: 68px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 32px;
+
+  background: color-mix(in srgb, var(--bg-surface) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
+
+  z-index: 1050;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Opens the sidebar drawer, hidden on desktop */
+.sidebar-toggle-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.navbar-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navbar-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.navbar-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Right side: theme toggle + admin details + logout */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.profile {
+  text-align: right;
+}
+
+.profile h4 {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.profile p {
+  margin: 1px 0 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.logout-btn {
+  background: var(--bg-surface-alt);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color-strong);
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+.logout-btn:hover {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+/* Mobile / small tablet, <=768px */
+@media (max-width: 768px) {
+
+  .admin-navbar {
+    left: 0;
+    padding: 0 14px;
+  }
+
+  .navbar-title {
+    font-size: 0.92rem;
+  }
+
+  .sidebar-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Admin details stay visible in the navbar; logout moves to the sidebar */
+  .logout-btn {
+    display: none;
+  }
+}
+
+/* Small mobile, <=480px */
+@media (max-width: 480px) {
+
+  .admin-navbar {
+    padding: 0 10px;
+  }
+
+  .navbar-eyebrow {
+    display: none;
+  }
+
+  .navbar-title {
+    font-size: 0.85rem;
+  }
+
+  .profile h4 {
+    font-size: 0.78rem;
+  }
+
+  .profile p {
+    font-size: 0.68rem;
+  }
+}
+
+/* Search icon toggle — hidden on desktop */
+.search-toggle-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--color-primary);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* Expandable mobile search row — hidden by default */
+.mobile-search-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .navbar-center {
+    display: none;
+  }
+
+  .search-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-search-bar {
+    display: block;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    padding: 12px 15px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    z-index: 1040;
+  }
+
+  .mobile-search-bar input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    outline: none;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+  }
+
+  .mobile-search-bar input:focus {
+    border-color: var(--color-primary);
+  }
+}

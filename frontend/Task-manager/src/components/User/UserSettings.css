@@ -1,0 +1,567 @@
+/* ==========================================================
+   Design tokens (prefixed too, so they can't leak/collide)
+   — now mapped onto the global theme tokens so this page
+   matches the rest of the app and supports dark mode
+   ========================================================== */
+
+.user-settings-page {
+    --us-ink: var(--text-primary);
+    --us-ink-soft: var(--text-secondary);
+    --us-ink-faint: var(--text-faint);
+    --us-line: var(--border-color);
+    --us-line-strong: var(--border-color-strong);
+
+    --us-surface: var(--bg-body);
+    --us-card: var(--bg-surface);
+
+    --us-accent: var(--color-primary);
+    --us-accent-hover: var(--color-primary-hover);
+    --us-accent-soft: var(--color-primary-bg);
+
+    --us-danger: var(--color-danger);
+    --us-danger-hover: var(--color-danger-hover);
+    --us-danger-soft: var(--color-danger-bg);
+    --us-danger-line: var(--color-danger-bg);
+
+    --us-success: var(--color-success);
+    --us-success-soft: var(--color-success-bg);
+
+    --us-radius-lg: 14px;
+    --us-radius-sm: 7px;
+
+    --us-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.08), 0 10px 28px rgba(0, 0, 0, 0.10);
+    --us-shadow-modal: 0 24px 70px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================
+   Page
+   ========================================================== */
+
+.user-settings-page {
+    min-height: 100vh;
+    width: 100%;
+    background: var(--us-surface);
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(128, 128, 128, 0.12) 1px, transparent 0);
+    background-size: 22px 22px;
+    display: flex;
+    justify-content: center;
+    padding: 72px 24px;
+    box-sizing: border-box;
+    font-family: "Söhne", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.user-settings-page *,
+.user-settings-page *::before,
+.user-settings-page *::after {
+    box-sizing: border-box;
+}
+
+.user-settings-page .user-settings-card {
+    width: 100%;
+    max-width: 560px;
+    height: fit-content;
+    background: var(--us-card);
+    border: 1px solid var(--us-line);
+    border-radius: var(--us-radius-lg);
+    box-shadow: var(--us-shadow-card);
+    padding: 40px 40px 8px;
+}
+
+.user-settings-page .user-settings-card h2 {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    color: var(--us-ink);
+}
+
+.user-settings-page .user-settings-card h2::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 3px;
+    margin-top: 14px;
+    background: var(--us-accent);
+    border-radius: 2px;
+}
+
+/* ==========================================================
+   Sections
+   ========================================================== */
+
+.user-settings-page .settings-section,
+.user-settings-page .danger-section {
+    padding: 28px 0 32px;
+    border-top: 1px solid var(--us-line);
+}
+
+.user-settings-page .settings-section h3,
+.user-settings-page .danger-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 650;
+    color: var(--us-ink);
+}
+
+.user-settings-page .settings-section h3::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--us-accent);
+}
+
+.user-settings-page .danger-section h3 {
+    color: var(--us-danger);
+}
+
+.user-settings-page .danger-section h3::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--us-danger);
+}
+
+.user-settings-page .settings-section p,
+.user-settings-page .danger-section p {
+    margin: 0 0 18px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--us-ink-soft);
+    max-width: 42ch;
+}
+
+/* ==========================================================
+   Buttons — every rule scoped under .user-settings-page so
+   .delete-btn here can NEVER be overridden by unrelated
+   .delete-btn classes used in other components (task lists,
+   admin tables, etc). Compound selectors beat single-class
+   selectors regardless of load order.
+   ========================================================== */
+
+.user-settings-page .secondary-btn,
+.user-settings-page .save-settings-btn,
+.user-settings-page .delete-btn {
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    font-family: inherit;
+    white-space: nowrap;
+    border-radius: var(--us-radius-sm);
+    padding: 10px 18px;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 130ms ease, border-color 130ms ease,
+        box-shadow 130ms ease, transform 80ms ease;
+}
+
+.user-settings-page .secondary-btn::before,
+.user-settings-page .secondary-btn::after,
+.user-settings-page .save-settings-btn::before,
+.user-settings-page .save-settings-btn::after,
+.user-settings-page .delete-btn::before,
+.user-settings-page .delete-btn::after {
+    content: none;
+    display: none;
+}
+
+.user-settings-page .secondary-btn:active:not(:disabled),
+.user-settings-page .save-settings-btn:active:not(:disabled),
+.user-settings-page .delete-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.user-settings-page .secondary-btn {
+    background: var(--us-card);
+    color: var(--us-ink);
+    border: 1px solid var(--us-line-strong);
+}
+
+.user-settings-page .secondary-btn:hover:not(:disabled) {
+    border-color: var(--border-color-strong);
+    background: var(--bg-surface-hover);
+}
+
+.user-settings-page .save-settings-btn {
+    background: var(--us-accent);
+    color: var(--text-on-color);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.user-settings-page .save-settings-btn:hover:not(:disabled) {
+    background: var(--us-accent-hover);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24), 0 8px 20px rgba(0, 0, 0, 0.28);
+    transform: translateY(-1px);
+}
+
+.user-settings-page .save-settings-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Quiet danger button on the settings page itself */
+.user-settings-page .danger-section .delete-btn {
+    gap: 8px;
+    background: var(--us-danger-soft);
+    color: var(--us-danger);
+    border: 1px solid transparent;
+}
+
+.user-settings-page .danger-section .delete-btn .btn-icon {
+    position: relative;
+    flex-shrink: 0;
+    display: inline-block;
+    width: 11px;
+    height: 12px;
+    margin-top: 4px;
+    border: 1.6px solid currentColor;
+    border-top: none;
+    border-radius: 0 0 2px 2px;
+}
+
+/* Lid */
+.user-settings-page .danger-section .delete-btn .btn-icon::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -3px;
+    width: 15px;
+    height: 1.6px;
+    background: currentColor;
+    border-radius: 1px;
+}
+
+/* Handle */
+.user-settings-page .danger-section .delete-btn .btn-icon::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: -6px;
+    width: 5px;
+    height: 3px;
+    border: 1.4px solid currentColor;
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+}
+
+.user-settings-page .danger-section .delete-btn:hover:not(:disabled) {
+    background: var(--color-danger-bg);
+    border-color: var(--us-danger-line);
+}
+
+/* Loud, unmistakable danger button inside the confirmation modal */
+.user-settings-page .modal-actions .delete-btn {
+    background: var(--us-danger);
+    color: var(--text-on-color);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.user-settings-page .modal-actions .delete-btn:hover:not(:disabled) {
+    background: var(--us-danger-hover);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.36);
+    transform: translateY(-1px);
+}
+
+.user-settings-page .modal-actions .delete-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.user-settings-page .secondary-btn:disabled,
+.user-settings-page .save-settings-btn:disabled,
+.user-settings-page .delete-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ==========================================================
+   Modal shell
+   ========================================================== */
+
+.user-settings-page .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+    animation: us-overlay-in 150ms ease-out;
+}
+
+.user-settings-page .modal-card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--us-card);
+    border: 1px solid var(--us-line);
+    border-radius: var(--us-radius-lg);
+    box-shadow: var(--us-shadow-modal);
+    padding: 30px 30px 26px;
+    animation: us-modal-in 190ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.user-settings-page .modal-card h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 650;
+    color: var(--us-ink);
+    letter-spacing: -0.01em;
+}
+
+.user-settings-page .modal-description {
+    margin: 0 0 22px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--us-ink-soft);
+}
+
+.user-settings-page .modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid var(--us-line);
+}
+
+.user-settings-page .modal-actions button {
+    flex: 0 0 auto;
+    padding: 10px 14px;
+}
+
+@keyframes us-overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes us-modal-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ==========================================================
+   Change Password form
+   ========================================================== */
+
+.user-settings-page .settings-input {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.user-settings-page .settings-input label {
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--us-ink-faint);
+}
+
+.user-settings-page .settings-input input {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--us-ink);
+    background: var(--us-surface);
+    border: 1px solid var(--us-line-strong);
+    border-radius: var(--us-radius-sm);
+    padding: 10px 12px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 130ms ease, background-color 130ms ease, box-shadow 130ms ease;
+}
+
+.user-settings-page .settings-input input::placeholder {
+    color: var(--us-ink-faint);
+}
+
+.user-settings-page .settings-input input:hover {
+    border-color: var(--border-color-strong);
+}
+
+.user-settings-page .settings-input input:focus {
+    background: var(--us-card);
+    border-color: var(--us-accent);
+    box-shadow: 0 0 0 3px var(--us-accent-soft);
+}
+
+/* ==========================================================
+   Status banners
+   ========================================================== */
+
+.user-settings-page .error-text,
+.user-settings-page .success-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    border-radius: var(--us-radius-sm);
+}
+
+.user-settings-page .error-text {
+    color: var(--us-danger);
+    background: var(--us-danger-soft);
+    border: 1px solid var(--us-danger-line);
+}
+
+.user-settings-page .error-text::before {
+    content: "!";
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--us-danger);
+    color: var(--text-on-color);
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+}
+
+.user-settings-page .success-text {
+    color: var(--us-success);
+    background: var(--us-success-soft);
+    border: 1px solid var(--color-success-bg);
+}
+
+.user-settings-page .success-text::before {
+    content: "✓";
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--us-success);
+    color: var(--text-on-color);
+    font-size: 9px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+}
+
+/* ==========================================================
+   Delete confirmation modal
+   ========================================================== */
+
+.user-settings-page .delete-modal {
+    position: relative;
+    padding-top: 34px;
+    border-top: 4px solid var(--us-danger);
+    border-radius: var(--us-radius-lg);
+}
+
+.user-settings-page .delete-modal h3 {
+    padding-left: 46px;
+    position: relative;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.user-settings-page .delete-modal h3::before {
+    content: "!";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--us-danger-soft);
+    color: var(--us-danger);
+    font-size: 15px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-settings-page .delete-warning {
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--us-danger);
+    margin: 0 0 10px;
+    padding: 10px 12px;
+    background: var(--us-danger-soft);
+    border: 1px solid var(--us-danger-line);
+    border-radius: var(--us-radius-sm);
+}
+
+.user-settings-page .delete-modal p:not(.delete-warning):not(.error-text) {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--us-ink-soft);
+    margin: 0 0 4px;
+}
+
+/* ==========================================================
+   Accessibility
+   ========================================================== */
+
+.user-settings-page button:focus-visible,
+.user-settings-page input:focus-visible {
+    outline: 2px solid var(--us-accent);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .user-settings-page .modal-overlay,
+    .user-settings-page .modal-card {
+        animation: none;
+    }
+
+    .user-settings-page .save-settings-btn:hover:not(:disabled),
+    .user-settings-page .modal-actions .delete-btn:hover:not(:disabled) {
+        transform: none;
+    }
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+
+@media (max-width: 480px) {
+    .user-settings-page {
+        padding: 32px 14px;
+    }
+
+    .user-settings-page .user-settings-card {
+        padding: 28px 22px 4px;
+    }
+
+    .user-settings-page .modal-card {
+        padding: 24px 20px 20px;
+    }
+
+    .user-settings-page .modal-actions {
+        flex-direction: column-reverse;
+        flex-wrap: nowrap;
+    }
+
+    .user-settings-page .modal-actions button {
+        width: 100%;
+    }
+}

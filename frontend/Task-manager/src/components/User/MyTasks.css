@@ -1,0 +1,300 @@
+.mytasks-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* ================= Header ================= */
+
+.mytasks-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.mytasks-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.create-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-primary);
+    color: var(--text-on-color);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.create-btn:hover {
+    background: var(--color-primary-hover);
+}
+
+/* ================= Two column layout ================= */
+
+.mytasks-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.mytasks-main {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.mytasks-side {
+    flex: 0 0 260px;
+    background: var(--bg-surface);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 20px;
+}
+
+.mytasks-side h3 {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    color: var(--text-primary);
+}
+
+/* ================= Overview status cards ================= */
+
+.status-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.status-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid var(--border-color-light);
+    background: var(--bg-surface-alt);
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.status-card.active {
+    border-color: var(--color-primary);
+    box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.status-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.status-count {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.status-card.total .status-count { color: var(--color-primary); }
+.status-card.overdue .status-count { color: var(--color-danger); }
+.status-card.due-today .status-count { color: var(--color-warning); }
+.status-card.completed .status-count { color: var(--color-success); }
+
+/* ================= Toolbar ================= */
+
+.task-toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.task-toolbar input {
+    flex: 1 1 200px;
+    max-width: 320px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color-strong);
+    font-size: 14px;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+.task-toolbar select {
+    flex: 0 0 auto;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color-strong);
+    font-size: 14px;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+/* ================= Table ================= */
+
+.task-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
+    background: var(--bg-surface);
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.task-table th,
+.task-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color-light);
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.task-table th {
+    background: var(--bg-surface-alt);
+    font-weight: 600;
+}
+
+.no-tasks-row {
+    text-align: center !important;
+    color: var(--text-muted);
+    padding: 24px 0 !important;
+}
+
+.badge-overdue,
+.badge-due-today {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    color: var(--text-on-color);
+    vertical-align: middle;
+}
+
+.badge-overdue { background: var(--color-danger); }
+.badge-due-today { background: var(--color-warning); }
+
+.high { color: var(--color-danger); font-weight: 600; }
+.medium { color: var(--color-warning); font-weight: 600; }
+.low { color: var(--color-success); font-weight: 600; }
+
+.action-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 6px;
+    margin-right: 4px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.action-btn.edit { color: var(--color-primary); }
+.action-btn.delete { color: var(--color-danger); }
+.action-btn.complete { color: var(--color-success); }
+
+.action-btn:hover {
+    background: var(--color-primary-bg);
+}
+
+/* ================= Mobile Responsive ================= */
+
+@media (max-width: 900px) {
+    .mytasks-layout {
+        flex-direction: column;
+    }
+
+    .mytasks-side {
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: 100%;
+        position: static;
+        order: -1; /* show overview above the table on mobile */
+    }
+
+    /* 2x2 grid: Total / Overdue on top, Due Today / Completed on bottom */
+    .status-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .status-card {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 4px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mytasks-container {
+        padding: 12px;
+    }
+
+    .task-toolbar {
+        gap: 8px;
+    }
+
+    .task-toolbar input {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .task-toolbar select {
+        flex: 0 0 auto;
+    }
+
+    /* Table stays a real table and scrolls horizontally instead of
+       collapsing into stacked cards. */
+    .task-table {
+        min-width: 600px;
+    }
+}
+
+@media (max-width: 480px) {
+    .status-cards {
+        gap: 8px;
+    }
+
+    .status-card {
+        padding: 10px;
+    }
+
+    .status-count {
+        font-size: 17px;
+    }
+
+    .status-label {
+        font-size: 12px;
+    }
+}

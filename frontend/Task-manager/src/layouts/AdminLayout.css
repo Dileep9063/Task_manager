@@ -1,0 +1,107 @@
+/* ===========================
+   GLOBAL
+=========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg-body);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+
+.admin-layout {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg-body);
+}
+
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+.admin-main {
+  margin-left: 260px;
+
+  padding-top: 68px; /* clears the fixed navbar — single source of top offset */
+  padding-inline: 30px;
+  padding-bottom: 30px;
+
+  min-height: 100vh;
+
+  background: var(--bg-body);
+
+  overflow-y: auto;
+}
+
+/* ===========================
+   PAGE WRAPPER
+=========================== */
+
+.page-wrapper {
+  width: 100%;
+  padding-top: 24px;
+}
+
+/* ===========================
+   COMMON CARD
+=========================== */
+
+.card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+.admin-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-main::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 20px;
+}
+
+/* ===========================
+   RESPONSIVE TABLET
+=========================== */
+
+@media (max-width: 992px) {
+
+  .admin-main {
+    margin-left: 230px;
+    padding-inline: 25px;
+    padding-bottom: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .admin-main {
+    margin-left: 0;
+    padding-top: 68px; /* matches navbar height exactly */
+    padding-inline: 20px;
+    padding-bottom: 20px;
+  }
+}
