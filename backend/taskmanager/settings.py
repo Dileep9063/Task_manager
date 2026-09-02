@@ -97,6 +97,12 @@ JWT_SECRET = os.getenv("JWT_SECRET", "change_me")
 EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
 
+# ================= AI Assistant (Groq) =================
+# Used by api/ai_agent.py for the admin AI chat feature. Both values are
+# read from the .env file already loaded via load_dotenv() above.
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+
 USE_TZ = True
 
 # ================= Cache (used for rate limiting) =================

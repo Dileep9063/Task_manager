@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import AdminNavbar from "../components/admin/AdminNavbar";
 import AdminSidebar from "../components/admin/AdminSidebar";
+import AiChatWidget from "../components/AiAssistant/AiChatWidget";
 import { useTheme } from "../context/ThemeContext";
 
 import "./AdminLayout.css";
@@ -58,6 +59,8 @@ function AdminLayout() {
                 </div>
 
             </main>
+
+            <AiChatWidget role="admin" />
 
         </div>
 

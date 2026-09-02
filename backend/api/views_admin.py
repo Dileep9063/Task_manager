@@ -27,6 +27,17 @@ def _otp_expired(otp_expiry) -> bool:
     return now > otp_expiry
 
 
+def _to_aware_utc(dt):
+    """Normalize a datetime to timezone-aware UTC so mixed naive/aware
+    values (e.g. from different DB columns) can be safely compared/sorted.
+    None is treated as the earliest possible time."""
+    if dt is None:
+        return datetime.min.replace(tzinfo=timezone.utc)
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt
+
+
 # ================= Dashboard =================
 
 @api_view(["GET"])
@@ -100,7 +111,7 @@ def get_dashboard_data(request):
             "time": t["created_at"],
         })
 
-    activities.sort(key=lambda a: a["time"] or datetime.min.replace(tzinfo=timezone.utc), reverse=True)
+    activities.sort(key=lambda a: _to_aware_utc(a["time"]), reverse=True)
 
     return Response({
         "totalUsers": int(users["count"]),

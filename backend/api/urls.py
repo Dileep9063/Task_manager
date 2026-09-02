@@ -2,6 +2,7 @@ from django.urls import path
 
 from api import (
     views_admin,
+    views_ai,
     views_auth,
     views_notifications,
     views_support,
@@ -78,4 +79,8 @@ urlpatterns = [
     path("api/admin/support/tickets", views_admin.get_all_support_tickets),
     path("api/admin/support/tickets/<int:ticket_id>", views_admin.update_support_ticket),
     path("api/admin/support/tickets/<int:ticket_id>/reply", views_admin.reply_support_ticket_as_admin),
+
+    # ================= AI Assistant =================
+    path("api/user/ai/chat", views_ai.user_ai_chat),
+    path("api/admin/ai/chat", views_ai.admin_ai_chat),
 ]

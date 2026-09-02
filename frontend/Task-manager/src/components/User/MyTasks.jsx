@@ -208,8 +208,8 @@ function MyTasks() {
                                         <td data-label="Title">{task.title}</td>
 
                                         <td data-label="Priority">
-                                            <span className={task.priority.toLowerCase()}>
-                                                {task.priority}
+                                            <span className={task.priority?.toLowerCase() ?? "unset"}>
+                                                {task.priority ?? "—"}
                                             </span>
                                         </td>
 

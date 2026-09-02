@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import UserSidebar from "../components/User/UserSidebar";
 import UserNavbar from "../components/User/UserNavbar";
+import AiChatWidget from "../components/AiAssistant/AiChatWidget";
 import "./AdminLayout.css";
 
 function UserLayout() {
@@ -46,6 +47,8 @@ function UserLayout() {
                 </div>
 
             </main>
+
+            <AiChatWidget role="user" />
 
         </div>
 
