@@ -23,8 +23,15 @@ RUN npm run build
 FROM nginx:1.27-alpine
 
 COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
+# Railway (and most PaaS) assign a dynamic $PORT at runtime that the
+# container must bind to - it can differ between deploys, so it can't be
+# baked in at build time. The official nginx image auto-renders any
+# *.template file in /etc/nginx/templates/ via envsubst on container
+# start, substituting ${PORT} below. Defaults to 80 for local
+# `docker run` / docker-compose use where no PORT is set.
+ENV PORT=80
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
