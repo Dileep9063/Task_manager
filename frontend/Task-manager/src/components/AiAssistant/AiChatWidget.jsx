@@ -4,7 +4,7 @@ import { LuBot, LuSend, LuX, LuSparkles } from "react-icons/lu";
 import { API_BASE_URL } from "../../config/api";
 import "./AiChatWidget.css";
 
-function AiChatWidget({ role }) {
+function AiChatWidget({ role, onActionComplete }) {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -22,9 +22,15 @@ function AiChatWidget({ role }) {
 
   useEffect(() => {
     if (open && messages.length === 0) {
-      setMessages([{ role: "assistant", content: greeting, actions: [] }]);
+      setMessages([
+        {
+          role: "assistant",
+          content: greeting,
+          actions: [],
+        },
+      ]);
     }
-  }, [open]);
+  }, [open, greeting, messages.length]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -34,9 +40,17 @@ function AiChatWidget({ role }) {
 
   const sendMessage = async () => {
     const text = input.trim();
+
     if (!text || loading) return;
 
-    const nextMessages = [...messages, { role: "user", content: text }];
+    const nextMessages = [
+      ...messages,
+      {
+        role: "user",
+        content: text,
+      },
+    ];
+
     setMessages(nextMessages);
     setInput("");
     setLoading(true);
@@ -44,6 +58,7 @@ function AiChatWidget({ role }) {
 
     try {
       const token = localStorage.getItem("token");
+
       const payload = {
         messages: nextMessages.map((m) => ({
           role: m.role,
@@ -51,22 +66,37 @@ function AiChatWidget({ role }) {
         })),
       };
 
-      const res = await axios.post(`${API_BASE_URL}${endpoint}`, payload, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.post(
+        `${API_BASE_URL}${endpoint}`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
+      const actions = res.data.actions || [];
+
+      // Add AI response to chat
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
           content: res.data.reply || "Done.",
-          actions: res.data.actions || [],
+          actions: actions,
         },
       ]);
+
+      // Notify the parent page that the AI performed an action
+      if (actions.length > 0 && onActionComplete) {
+        onActionComplete(actions);
+      }
     } catch (err) {
       const msg =
         err.response?.data?.message ||
         "Something went wrong reaching the AI assistant.";
+
       setError(msg);
     } finally {
       setLoading(false);
@@ -95,11 +125,16 @@ function AiChatWidget({ role }) {
           <div className="ai-panel-header">
             <div className="ai-panel-heading">
               <LuSparkles className="ai-panel-icon" />
+
               <div>
                 <h3>AI Assistant</h3>
-                <span>{role === "admin" ? "Admin mode" : "Task mode"}</span>
+
+                <span>
+                  {role === "admin" ? "Admin mode" : "Task mode"}
+                </span>
               </div>
             </div>
+
             <button
               className="ai-panel-close"
               onClick={() => setOpen(false)}
@@ -111,8 +146,13 @@ function AiChatWidget({ role }) {
 
           <div className="ai-panel-body" ref={scrollRef}>
             {messages.map((m, i) => (
-              <div key={i} className={`ai-msg ai-msg--${m.role}`}>
-                <div className="ai-msg-bubble">{m.content}</div>
+              <div
+                key={i}
+                className={`ai-msg ai-msg--${m.role}`}
+              >
+                <div className="ai-msg-bubble">
+                  {m.content}
+                </div>
 
                 {m.actions && m.actions.length > 0 && (
                   <div className="ai-actions-log">
@@ -120,10 +160,13 @@ function AiChatWidget({ role }) {
                       <div
                         key={j}
                         className={`ai-action-item ${
-                          a.result?.error ? "ai-action-item--error" : ""
+                          a.result?.error
+                            ? "ai-action-item--error"
+                            : ""
                         }`}
                       >
                         <span className="ai-action-dot" />
+
                         <span>
                           {a.result?.error
                             ? `${a.tool} failed: ${a.result.error}`
@@ -146,7 +189,11 @@ function AiChatWidget({ role }) {
               </div>
             )}
 
-            {error && <div className="ai-error">{error}</div>}
+            {error && (
+              <div className="ai-error">
+                {error}
+              </div>
+            )}
           </div>
 
           <div className="ai-panel-input">
@@ -161,6 +208,7 @@ function AiChatWidget({ role }) {
               }
               rows={1}
             />
+
             <button
               onClick={sendMessage}
               disabled={loading || !input.trim()}

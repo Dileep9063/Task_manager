@@ -11,39 +11,65 @@ function Users() {
     // Fetch Users
     // ==========================================
 
+    const fetchUsers = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            // Mark all new users as seen
+            await axios.put(
+                `${API_BASE_URL}/api/admin/users/seen`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            // Get users
+            const response = await axios.get(
+                `${API_BASE_URL}/api/admin/users`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            setUsers(response.data);
+        } catch (error) {
+            console.log("Fetch users error:", error);
+        }
+    };
+
+    // ==========================================
+    // Initial Fetch
+    // ==========================================
+
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const token = localStorage.getItem("token");
+        fetchUsers();
+    }, []);
 
-                // Mark all new users as seen
-                await axios.put(
-                    `${API_BASE_URL}/api/admin/users/seen`,
-                    {},
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
+    // ==========================================
+    // Refresh Users After AI Action
+    // ==========================================
 
-                // Get users
-                const response = await axios.get(
-                    `${API_BASE_URL}/api/admin/users`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                setUsers(response.data);
-            } catch (error) {
-                console.log("Fetch users error:", error);
-            }
+    useEffect(() => {
+        const handleAIAction = () => {
+            fetchUsers();
         };
 
-        fetchUsers();
+        window.addEventListener(
+            "ai-admin-action-complete",
+            handleAIAction
+        );
+
+        return () => {
+            window.removeEventListener(
+                "ai-admin-action-complete",
+                handleAIAction
+            );
+        };
     }, []);
 
     // ==========================================
@@ -71,6 +97,7 @@ function Users() {
                 }
             );
 
+            // Update UI immediately
             setUsers((prevUsers) =>
                 prevUsers.map((user) =>
                     user.id === id
@@ -82,7 +109,10 @@ function Users() {
                 )
             );
         } catch (error) {
-            console.log("Update user status error:", error);
+            console.log(
+                "Update user status error:",
+                error
+            );
         }
     };
 
@@ -119,7 +149,10 @@ function Users() {
 
             alert("User deleted successfully");
         } catch (error) {
-            console.log("Delete user error:", error);
+            console.log(
+                "Delete user error:",
+                error
+            );
         }
     };
 
@@ -153,131 +186,140 @@ function Users() {
     return (
         <div className="users-page">
 
-            {/* =================================
-                PAGE TITLE
-            ================================= */}
+            {/* PAGE TITLE */}
 
             <h1>
                 Users Management
             </h1>
 
+            {/* SEARCH */}
 
-            {/* =================================
-                TABLE CONTAINER
-            ================================= */}
+            <div className="users-search">
+                <input
+                    type="text"
+                    placeholder="Search users..."
+                    value={search}
+                    onChange={(e) =>
+                        setSearch(e.target.value)
+                    }
+                    className="search-box"
+                />
+            </div>
 
-            {/* Search stays fixed while table scrolls */}
+            {/* USERS TABLE */}
 
-<div className="users-search">
+            <div className="users-table">
+                <table>
 
-    <input
-        type="text"
-        placeholder="Search users..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="search-box"
-    />
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Created Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-</div>
+                    <tbody>
 
+                        {filteredUsers.length > 0 ? (
 
-{/* Only the table scrolls horizontally */}
+                            filteredUsers.map((user) => (
+                                <tr key={user.id}>
 
-<div className="users-table">
+                                    <td>
+                                        {user.id}
+                                    </td>
 
-    <table>
+                                    <td>
+                                        {user.name}
+                                    </td>
 
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Created Date</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+                                    <td>
+                                        {user.email}
+                                    </td>
 
-        <tbody>
-            {filteredUsers.length > 0 ? (
-                filteredUsers.map((user) => (
-                    <tr key={user.id}>
+                                    <td>
+                                        {user.role}
+                                    </td>
 
-                        <td>{user.id}</td>
+                                    <td>
+                                        {user.created_at
+                                            ? new Date(
+                                                  user.created_at
+                                              ).toLocaleDateString()
+                                            : "N/A"}
+                                    </td>
 
-                        <td>{user.name}</td>
+                                    <td>
+                                        <span
+                                            className={
+                                                user.status ===
+                                                "active"
+                                                    ? "active-status"
+                                                    : "blocked-status"
+                                            }
+                                        >
+                                            {user.status ||
+                                                "active"}
+                                        </span>
+                                    </td>
 
-                        <td>{user.email}</td>
+                                    <td>
+                                        <div className="user-actions">
 
-                        <td>{user.role}</td>
+                                            <button
+                                                className="status-btn"
+                                                onClick={() =>
+                                                    handleStatus(
+                                                        user.id,
+                                                        user.status
+                                                    )
+                                                }
+                                            >
+                                                {user.status ===
+                                                "active"
+                                                    ? "Block"
+                                                    : "Unblock"}
+                                            </button>
 
-                        <td>
-                            {user.created_at
-                                ? new Date(
-                                      user.created_at
-                                  ).toLocaleDateString()
-                                : "N/A"}
-                        </td>
+                                            <button
+                                                className="delete-user-btn"
+                                                onClick={() =>
+                                                    handleDelete(
+                                                        user.id
+                                                    )
+                                                }
+                                            >
+                                                Delete
+                                            </button>
 
-                        <td>
-                            <span
-                                className={
-                                    user.status === "active"
-                                        ? "active-status"
-                                        : "blocked-status"
-                                }
-                            >
-                                {user.status || "active"}
-                            </span>
-                        </td>
+                                        </div>
+                                    </td>
 
-                        <td>
-                            <div className="user-actions">
+                                </tr>
+                            ))
 
-                                <button
-                                    className="status-btn"
-                                    onClick={() =>
-                                        handleStatus(
-                                            user.id,
-                                            user.status
-                                        )
-                                    }
+                        ) : (
+
+                            <tr>
+                                <td
+                                    colSpan="7"
+                                    className="no-users"
                                 >
-                                    {user.status === "active"
-                                        ? "Block"
-                                        : "Unblock"}
-                                </button>
+                                    No users found
+                                </td>
+                            </tr>
 
-                                <button
-                                    className="delete-user-btn"
-                                    onClick={() =>
-                                        handleDelete(user.id)
-                                    }
-                                >
-                                    Delete
-                                </button>
+                        )}
 
-                            </div>
-                        </td>
+                    </tbody>
 
-                    </tr>
-                ))
-            ) : (
-                <tr>
-                    <td
-                        colSpan="7"
-                        className="no-users"
-                    >
-                        No users found
-                    </td>
-                </tr>
-            )}
-        </tbody>
-
-    </table>
-
-</div>
+                </table>
+            </div>
 
         </div>
     );
