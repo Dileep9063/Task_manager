@@ -35,6 +35,7 @@ ALLOWED_HOSTS = _env_list("DJANGO_ALLOWED_HOSTS", ["*"] if DEBUG else [])
 INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.auth",
+    "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
     "api",
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
@@ -75,6 +77,9 @@ DATABASES = {
         "PASSWORD": os.getenv("DB_PASSWORD", ""),
         "NAME": os.getenv("DB_NAME", "task_manager"),
         "CONN_MAX_AGE": int(os.getenv("DB_CONN_MAX_AGE", "60")),
+        "OPTIONS": {
+            "sslmode": "require",
+        },
     }
 }
 
@@ -131,6 +136,8 @@ else:
 # for these to take effect.
 if not DEBUG:
     SECURE_SSL_REDIRECT = _env_bool("DJANGO_SECURE_SSL_REDIRECT", True)
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = int(os.getenv("DJANGO_HSTS_SECONDS", "31536000"))
@@ -142,3 +149,6 @@ if not DEBUG:
     # terminates TLS and forwards plain HTTP, uncomment this so Django
     # correctly detects the original request was HTTPS:
     # SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    # ================= Static Files =================
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
